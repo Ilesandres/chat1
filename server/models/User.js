@@ -23,6 +23,14 @@ const User=sequelize.define('User',{
     password:{
         type:DataTypes.STRING,
         allowNull:false,
+    },
+    online: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    lastSeen: {
+        type: DataTypes.DATE,
+        allowNull: true
     }
 },{
     timestamps:true,

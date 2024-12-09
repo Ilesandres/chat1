@@ -1,6 +1,9 @@
 const express=require('express');
 const bcrypt=require('bcrypt');
 const User=require('../models/User');
+const Contact=require('../models/Contact');
+const auth=require('../middleware/auth');
+const jwt=require('jsonwebtoken');
 
 const router=express.Router();
 
@@ -32,15 +35,33 @@ router.post('/register',async(req,res)=>{
 router.post('/login', async (req,res)=>{
     const {email,password}= req.body;
     try {
-        const user=await User.findOne({where:{email}});
+        const user = await User.findOne({where:{email}});
         if(!user) return res.status(404).json({error:'usuario no encontrado'});
 
-        const isMatch=await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(401).json({error:'contraseña incorrecta'});
-        res.json(user);
+
+        // Generar token JWT
+        const token = jwt.sign(
+            { id: user.id, email: user.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+
+        // Actualizar estado online
+        await user.update({ online: true, lastSeen: new Date() });
+
+        res.json({
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email
+            },
+            token
+        });
     } catch (err) {
         res.status(400).json({error:err.message});
-    };
+    }
 });
 
 // Obtener perfil de usuario
@@ -65,6 +86,31 @@ router.put('/profile/:id', async (req, res) => {
         
         await user.update({ username, email });
         res.json({ message: 'Perfil actualizado exitosamente' });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+router.post('/block/:userId', auth, async (req, res) => {
+    try {
+        const contact = await Contact.findOne({
+            where: {
+                userId: req.user.id,
+                friendId: req.params.userId
+            }
+        });
+        
+        if (contact) {
+            await contact.update({ status: 'blocked' });
+            res.json({ message: 'Usuario bloqueado' });
+        } else {
+            await Contact.create({
+                userId: req.user.id,
+                friendId: req.params.userId,
+                status: 'blocked'
+            });
+            res.json({ message: 'Usuario bloqueado' });
+        }
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
