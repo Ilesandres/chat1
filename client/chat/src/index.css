@@ -1,0 +1,187 @@
+/* Estilo base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  h1, h2, h3 {
+    color: #1a202c;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Estilo del contenedor principal */
+  div {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Formularios */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  form div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #4a90e2;
+    background-color: #f3faff;
+  }
+  
+  /* Botones */
+  button {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #357ab8;
+  }
+  
+  button:active {
+    background-color: #2c5f93;
+  }
+  
+  /* Lista de chats */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    background-color: #f9fafb;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  ul li:hover {
+    background-color: #f0f4f8;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #1a73e8;
+    font-weight: bold;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Chat */
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: space-between;
+  }
+  
+  .chat-container div {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+  
+  .chat-container div p {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
+  .chat-container div p:nth-child(odd) {
+    background-color: #eaf4fe;
+    align-self: flex-start;
+  }
+  
+  .chat-container div p:nth-child(even) {
+    background-color: #e3fcec;
+    align-self: flex-end;
+  }
+  
+  .chat-input {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .chat-input button {
+    padding: 10px 15px;
+  }
+  
+  .chat-input input:focus {
+    border-color: #4a90e2;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    div {
+      margin: 10px;
+      padding: 15px;
+    }
+  
+    button {
+      font-size: 14px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      font-size: 14px;
+    }
+  }
+  
