@@ -35,4 +35,30 @@ router.get('/:userId', async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/contacts:
+ *   get:
+ *     summary: Obtiene todos los contactos
+ *     tags: [Contacts]
+ *     responses:
+ *       200:
+ *         description: Lista de contactos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   phone:
+ *                     type: string
+ */
+
 module.exports = router; 

@@ -8,6 +8,35 @@ const auth = require('../middleware/auth');
 
 const router=express.Router();
 
+
+/**
+ * @swagger
+ * /api/messages:
+ *   post:
+ *     summary: Crea un nuevo mensaje
+ *     tags: [Messages]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - content
+ *               - contactId
+ *             properties:
+ *               content:
+ *                 type: string
+ *               contactId:
+ *                 type: integer
+ *     responses:
+ *       201:
+ *         description: Mensaje creado exitosamente
+ *       400:
+ *         description: Error en los datos proporcionados
+ */
+
+
 router.post('/', auth, async(req, res)=>{
     const {content, sender_id, receiver_id}=req.body;
 

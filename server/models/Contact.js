@@ -12,4 +12,5 @@ const Contact = sequelize.define('Contact', {
 Contact.belongsTo(User, { as: 'user', foreignKey: 'userId' });
 Contact.belongsTo(User, { as: 'friend', foreignKey: 'friendId' });
 
+
 module.exports = Contact; 
