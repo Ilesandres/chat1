@@ -1,7 +1,10 @@
 
 proyecto de chat simple (aun sin unir server con cliente)
 
-- *TECNOLOIGAS*
+ruta de back:  `` localhost:3005/api``<br/>
+doc-test:     ``localhost:3005/api-docs/*/``
+
+- *TECNOLOGIAS*
     - node <br>
         * sql2 <br/>
         * expres<br>
@@ -54,10 +57,28 @@ proyecto de chat simple (aun sin unir server con cliente)
            - package.json
            - README.MD
     - server
+        -config
+            database.js
         - docs
             - sql data.sql
-        - node_modules
-        - package-lock.json
-        - package.json
-        - serv.js
+        -middleware
+            -auth.js
+        -models
+            -Contact.js  
+            -Message.js
+            -User.js
+            -Group.js
+            -Notification.js
+        -routes
+            -messageRoutes.js
+            -userRoutes.js
+            -contactRoutes.js
+        -uploads
+        -node_modules
+        -package-lock.json
+        -package.json
+        -.env
+        -serv.js
     - README.md
+
+![Tienda en linea SQl](https://github.com/Ilesandres/img_Proyects/blob/main/chatapp/image.png)

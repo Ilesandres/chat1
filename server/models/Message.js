@@ -3,7 +3,7 @@ const sequelize=require('../config/database');
 const User=require('./User');
 
 const Message=sequelize.define('Message',{
-    message_id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -16,15 +16,19 @@ const Message=sequelize.define('Message',{
         type:DataTypes.INTEGER,
         references:{
             model:User,
-            key:'user_id',
+            key:'id',
         },
     },
     receiver_id:{
         type:DataTypes.INTEGER,
         references:{
             model:User,
-            key:'user_id',
+            key:'id',
         },
+    },
+    read: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 },{
     timestamps:true,
@@ -34,13 +38,13 @@ const Message=sequelize.define('Message',{
 Message.belongsTo(User, {
     as: 'sender',
     foreignKey: 'sender_id',
-    targetKey: 'user_id'
+    targetKey: 'id'
 });
 
 Message.belongsTo(User, {
     as: 'receiver',
     foreignKey: 'receiver_id',
-    targetKey: 'user_id'
+    targetKey: 'id'
 });
 
 module.exports=Message;

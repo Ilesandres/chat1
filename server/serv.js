@@ -61,7 +61,7 @@ app.use('/api/contacts', contactRoutes);
 
 sequelize.authenticate().then(()=>{
     console.log('conectado a la base de datos');
-    return sequelize.sync({alter:true});
+    return sequelize.sync({ alter: true });
 }).then(()=>{
     app.listen(PORT,()=>{
         console.log('servidor corriendo en http://localhost:'+PORT)

@@ -201,7 +201,7 @@ const router=express.Router();
  *         description: Usuario no encontrado
  * 
  * @swagger
- * /api/users/block/{userId}:
+/users/block/{userId}:
  *   post:
  *     summary: Bloquea a un usuario
  *     tags: [Users]
@@ -282,7 +282,7 @@ router.post('/login', async (req,res)=>{
 router.get('/profile/:id', async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id, {
-            attributes: ['user_id', 'username', 'email'] // excluimos password
+            attributes: ['id', 'username', 'email'] // excluimos password
         });
         if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
         res.json(user);
