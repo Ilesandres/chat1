@@ -5,12 +5,10 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Agregar contacto
 router.post('/add', auth, async (req, res) => {
     try {
         const { friendId } = req.body;
         
-        // Verificar si ya existe el contacto
         const existingContact = await Contact.findOne({
             where: {
                 userId: req.user.id,
@@ -34,7 +32,6 @@ router.post('/add', auth, async (req, res) => {
     }
 });
 
-// Listar contactos
 router.get('/', auth, async (req, res) => {
     try {
         console.log('Usuario autenticado:', req.user.id);
@@ -59,7 +56,6 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// Aceptar contacto
 router.put('/accept/:contactId', auth, async (req, res) => {
     try {
         const contact = await Contact.findOne({
@@ -81,13 +77,12 @@ router.put('/accept/:contactId', auth, async (req, res) => {
     }
 });
 
-// Endpoint de prueba
 router.get('/debug', auth, async (req, res) => {
     try {
         const userId = req.user.id;
         const allContacts = await Contact.findAll({
             where: { userId },
-            raw: true // Para ver los datos planos
+            raw: true 
         });
         
         res.json({

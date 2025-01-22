@@ -2,7 +2,7 @@
 proyecto de chat simple (aun sin unir server con cliente)
 
 ruta de back:  `` localhost:3005/api``<br/>
-doc-test:     ``localhost:3005/api-docs/*/``
+doc-test:     ``localhost:3005/api-docs/*``
 
 - *TECNOLOGIAS*
     - node <br>
