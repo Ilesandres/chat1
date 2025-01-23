@@ -34,7 +34,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
 }
 
 .form-group {
@@ -464,5 +464,230 @@ body {
     .send-button {
         padding: 0.7rem 1.2rem;
     }
+}
+
+/* Estilos para solicitudes de amistad */
+.requests-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.requests-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 1.2rem;
+}
+
+.requests-list {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.request-info h3 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 1rem;
+}
+
+.request-date {
+    color: #666;
+    font-size: 0.8rem;
+    margin: 0.2rem 0 0 0;
+}
+
+.request-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.accept-button {
+    padding: 0.5rem 1rem;
+    background-color: #00a884;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reject-button {
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.accept-button:hover {
+    background-color: #008f72;
+}
+
+.reject-button:hover {
+    background-color: #c82333;
+}
+
+.no-requests {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.no-messages {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.no-messages p {
+  margin: 0;
+}
+
+/* Estilos para el botón de solicitudes */
+.requests-button {
+    padding: 0.5rem 1rem;
+    background-color: #00a884;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.requests-button:hover {
+    background-color: #008f72;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Mejorar el header-left para mejor alineación */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Opcional: Agregar un badge para mostrar número de solicitudes pendientes */
+.requests-button .badge {
+    background-color: #dc3545;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Estilos para la sección de búsqueda */
+.search-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+}
+
+.search-box {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.search-button {
+    padding: 0.7rem 1.2rem;
+    background-color: #00a884;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: #008f72;
+}
+
+.search-results {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.search-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+}
+
+.user-info h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.user-info p {
+    margin: 0.2rem 0 0 0;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.add-button {
+    padding: 0.5rem 1rem;
+    background-color: #00a884;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-button:hover {
+    background-color: #008f72;
+}
+
+.form-footer {
+    margin-top: 1rem;
+    text-align: center;
+    color: #666;
+}
+
+.form-footer a {
+    color: #00a884;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
 }
   

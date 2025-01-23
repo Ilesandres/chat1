@@ -4,6 +4,7 @@ const User=require('../models/User');
 const Contact=require('../models/Contact');
 const auth=require('../middleware/auth');
 const jwt=require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 const router=express.Router();
 
@@ -201,7 +202,7 @@ const router=express.Router();
  *         description: Usuario no encontrado
  * 
  * @swagger
-/users/block/{userId}:
+ * /users/block/{userId}:
  *   post:
  *     summary: Bloquea a un usuario
  *     tags: [Users]
@@ -219,6 +220,41 @@ const router=express.Router();
  *         description: Usuario bloqueado exitosamente
  *       400:
  *         description: Error al bloquear usuario
+ * 
+ * @swagger
+ * /users/search:
+ *   get:
+ *     summary: Busca usuarios por nombre o email
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Término de búsqueda (username o email)
+ *     responses:
+ *       200:
+ *         description: Lista de usuarios encontrados
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   username:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *       401:
+ *         description: No autorizado
+ *       400:
+ *         description: Error en la búsqueda
  */
 
 router.post('/register',async(req,res)=>{
@@ -326,6 +362,32 @@ router.post('/block/:userId', auth, async (req, res) => {
             res.json({ message: 'Usuario bloqueado' });
         }
     } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
+router.get('/search', auth, async (req, res) => {
+    try {
+        const { q } = req.query;
+        if (!q) return res.status(400).json({ error: 'Término de búsqueda requerido' });
+
+        // Buscar usuarios que coincidan con el término de búsqueda
+        const users = await User.findAll({
+            where: {
+                [Op.or]: [
+                    { username: { [Op.like]: `%${q}%` } },
+                    { email: { [Op.like]: `%${q}%` } }
+                ],
+                // Excluir al usuario actual de los resultados
+                id: { [Op.ne]: req.user.id }
+            },
+            attributes: ['id', 'username', 'email', 'online', 'lastSeen'],
+            limit: 10 // Limitar resultados
+        });
+
+        res.json(users);
+    } catch (err) {
+        console.error('Error en búsqueda de usuarios:', err);
         res.status(400).json({ error: err.message });
     }
 });

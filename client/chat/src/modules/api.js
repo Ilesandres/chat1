@@ -40,7 +40,6 @@ export const logout = () => {
     localStorage.removeItem('user');
 };
 
-// Funciones para mensajes y chats
 export const getRecentChats = async () => {
     try {
         const response = await api.get('/messages/recent');
@@ -80,13 +79,12 @@ export const markMessageAsRead = async (messageId) => {
     }
 };
 
-// Función para verificar si el token es válido
+
 export const checkAuth = async () => {
     try {
         const user = JSON.parse(localStorage.getItem('user'));
         if (!user) throw new Error('No hay usuario autenticado');
         
-        // Podríamos hacer una petición al servidor para validar el token
         return user;
     } catch (error) {
         logout();
@@ -114,6 +112,79 @@ export const markConversationAsRead = async (senderId) => {
     } catch (error) {
         console.error('API: Error al marcar mensajes como leídos:', error);
         throw new Error('Error al actualizar mensajes');
+    }
+};
+
+export const getPendingRequests = async () => {
+    try {
+        const response = await api.get('/contacts/pending');
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener solicitudes pendientes:', error);
+        throw new Error(error.response?.data?.error || 'Error al cargar solicitudes');
+    }
+};
+
+export const acceptRequest = async (contactId) => {
+    try {
+        const response = await api.put(`/contacts/accept/${contactId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error al aceptar solicitud:', error);
+        throw new Error(error.response?.data?.error || 'Error al aceptar solicitud');
+    }
+};
+
+export const rejectRequest = async (contactId) => {
+    try {
+        const response = await api.put(`/contacts/reject/${contactId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error al rechazar solicitud:', error);
+        throw new Error(error.response?.data?.error || 'Error al rechazar solicitud');
+    }
+};
+
+export const getAcceptedContacts = async () => {
+    try {
+        const response = await api.get('/contacts');
+        return response.data;
+    } catch (error) {
+        console.error('Error al obtener contactos:', error);
+        throw new Error(error.response?.data?.error || 'Error al cargar contactos');
+    }
+};
+
+export const searchUsers = async (query) => {
+    try {
+        const response = await api.get(`/users/search?q=${query}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error al buscar usuarios:', error);
+        throw new Error(error.response?.data?.error || 'Error al buscar usuarios');
+    }
+};
+
+export const sendFriendRequest = async (userId) => {
+    try {
+        const response = await api.post('/contacts/add', { friendId: userId });
+        return response.data;
+    } catch (error) {
+        console.error('Error al enviar solicitud:', error);
+        throw new Error(error.response?.data?.error || 'Error al enviar solicitud');
+    }
+};
+
+export const register = async (username, email, password) => {
+    try {
+        const response = await api.post('/users/register', {
+            username,
+            email,
+            password
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.error || 'Error al registrar usuario');
     }
 };
 

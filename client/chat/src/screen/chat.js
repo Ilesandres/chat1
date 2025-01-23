@@ -33,6 +33,14 @@ const Chat = () => {
         initChat();
     }, [userId]);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            loadMessages();
+        }, 3000); // Actualizar cada 3 segundos
+
+        return () => clearInterval(interval);
+    }, []);
+
     const markMessagesAsRead = async (userInfo) => {
         try {
             console.log('Intentando marcar mensajes como leídos. Sender:', userId, 'Receiver:', userInfo.id);

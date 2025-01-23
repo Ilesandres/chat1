@@ -95,6 +95,49 @@ router.get('/debug', auth, async (req, res) => {
     }
 });
 
+router.get('/pending', auth, async (req, res) => {
+    try {
+        const pendingContacts = await Contact.findAll({
+            where: {
+                friendId: req.user.id,
+                status: 'pending'
+            },
+            include: [{
+                model: User,
+                as: 'user',
+                attributes: ['id', 'username', 'email']
+            }]
+        });
+
+        console.log('Solicitudes pendientes encontradas:', pendingContacts.length);
+        res.json(pendingContacts);
+    } catch (err) {
+        console.error('Error al obtener solicitudes pendientes:', err);
+        res.status(400).json({ error: err.message });
+    }
+});
+
+router.put('/reject/:contactId', auth, async (req, res) => {
+    try {
+        const contact = await Contact.findOne({
+            where: {
+                id: req.params.contactId,
+                friendId: req.user.id,
+                status: 'pending'
+            }
+        });
+
+        if (!contact) {
+            return res.status(404).json({ error: 'Solicitud no encontrada' });
+        }
+
+        await contact.destroy();
+        res.json({ message: 'Solicitud rechazada' });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
 /**
  * @swagger
  * components:
@@ -227,6 +270,81 @@ router.get('/debug', auth, async (req, res) => {
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Contact'
+ * 
+ * @swagger
+ * /contacts/pending:
+ *   get:
+ *     summary: Obtiene todas las solicitudes de amistad pendientes
+ *     tags: [Contacts]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de solicitudes pendientes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   userId:
+ *                     type: integer
+ *                   friendId:
+ *                     type: integer
+ *                   status:
+ *                     type: string
+ *                     enum: [pending]
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                   user:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       username:
+ *                         type: string
+ *                       email:
+ *                         type: string
+ *       401:
+ *         description: No autorizado - Token inválido
+ *       400:
+ *         description: Error al obtener las solicitudes
+ * 
+ * @swagger
+ * /contacts/reject/{contactId}:
+ *   put:
+ *     summary: Rechaza una solicitud de amistad
+ *     tags: [Contacts]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: contactId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID de la solicitud a rechazar
+ *     responses:
+ *       200:
+ *         description: Solicitud rechazada exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Solicitud rechazada"
+ *       404:
+ *         description: Solicitud no encontrada
+ *       401:
+ *         description: No autorizado
+ *       400:
+ *         description: Error al rechazar la solicitud
  */
 
 module.exports = router; 

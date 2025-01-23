@@ -60,6 +60,9 @@ const Login = () => {
                     >
                         {loading ? 'Cargando...' : 'Entrar'}
                     </button>
+                    <div className="form-footer">
+                        <p>¿No tienes cuenta? <a href="/register">Regístrate</a></p>
+                    </div>
                 </form>
             </div>
         </div>

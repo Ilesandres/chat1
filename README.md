@@ -1,5 +1,6 @@
 
-proyecto de chat simple (aun sin unir server con cliente)
+proyecto de chat simple (aun sin unir server con cliente) <br>
+[``migration to websocket in progress``]
 
 ruta de back:  `` localhost:3005/api``<br/>
 doc-test:     ``localhost:3005/api-docs/*``
@@ -81,4 +82,5 @@ doc-test:     ``localhost:3005/api-docs/*``
         -serv.js
     - README.md
 
-![Tienda en linea SQl](https://github.com/Ilesandres/img_Proyects/blob/main/chatapp/image.png)
+![Chat en linea sql](https://github.com/Ilesandres/img_Proyects/blob/main/chatapp/image.png)
+![Chat component](https://github.com/Ilesandres/img_Proyects/tree/main/chatapp)
