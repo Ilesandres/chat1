@@ -83,4 +83,4 @@ doc-test:     ``localhost:3005/api-docs/*``
     - README.md
 
 ![Chat en linea sql](https://github.com/Ilesandres/img_Proyects/blob/main/chatapp/image.png)
-![Chat component](https://github.com/Ilesandres/img_Proyects/tree/main/chatapp)
+![Chat component](https://github.com/Ilesandres/img_Proyects/blob/main/chatapp/chats-component.png)
